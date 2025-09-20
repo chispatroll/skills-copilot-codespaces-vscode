@@ -1,0 +1,59 @@
+{
+  "name": "GitHub Skills: Copilot + Codespaces + VS Code",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    },
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-python.python",
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        "ms-vscode.vscode-json"
+      ],
+      "settings": {
+        "github.copilot.enable": {
+          "*": true,
+          "yaml": false,
+          "plaintext": false,
+          "markdown": false
+        },
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "files.autoSave": "afterDelay",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  "forwardPorts": [3000, 8000, 5000],
+  "portsAttributes": {
+    "3000": {
+      "label": "React App",
+      "onAutoForward": "notify"
+    },
+    "8000": {
+      "label": "Python Server",
+      "onAutoForward": "notify"
+    },
+    "5000": {
+      "label": "Flask App",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "postCreateCommand": "npm install -g create-react-app && pip install flask pandas numpy matplotlib requests",
+  
+  "remoteUser": "codespace"
+}
